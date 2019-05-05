@@ -8,3 +8,4 @@ console.log(a - b);
 ```
 
 * example003과 동일
+ 
