@@ -49,7 +49,7 @@ var b = 2;
 console.log(a + b);
 ```
 
-* html 이 실행되면 script에서 불 js파일이 실행됩니다.
+* html 이 실행되면 script에서 불러온 js파일이 실행됩니다.
 
 # 값과 변수 이해하기
 
