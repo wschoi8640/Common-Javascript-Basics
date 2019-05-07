@@ -184,3 +184,116 @@ if(result) {
   console.log('>> 참 입니다.');
 }
 ```
+
+# 조건문 - if, else if, else
+
+```javascript
+var number = 2;
+if(number == 1) {
+  console.log('number는 1 입니다.');
+} else if(number == 2) {
+  console.log('number는 2 입니다.');
+} else {
+  console.log('number는 1, 2 중 해당되는 것이 없습니다.');
+}
+```
+
+# 조건문 - switch
+
+```javascript
+var subject = 'javascript';
+switch(subject) {
+  case 'c' : 
+    console.log('c언어 입니다.');
+    break;
+  case 'javascript' :
+    console.log('javascript 입니다.);
+    break;
+  default :
+    console.log('c언어와 javascript 중 해당되는 것이 없습니다.);
+    break;
+}
+```
+
+# 반복문 - for
+
+```javascript
+for(var i = 0; i < 10; i++){
+  console.log(i + '번째 반복 문장입니다.');
+}
+
+```javascript
+var hometown = [
+  {name: '남준', place: '일산', city: '고양'},
+  {name: '진', place: '과천'},
+  {name: '호석', place: '광주', city: '전라도'},
+  {name: '지민', place: '부산', city: '경상도'}
+];
+for(var i = 0; i < hometown.length; i++){
+  var h = hometown[i];
+  if(!h || !h.city) continue;
+  
+  console.log(i + '번째 실행중입니다.');
+  
+  if(h.name == '호석') {
+    console.log(h.name + h.city + h.place);
+    break;
+  }
+}
+```
+
+# 반복문 - for x in y
+
+```javascript
+var store = {snack: 1000, flower: 5000, beverage: 2000};
+
+for(var item in store) {
+  if(!store.hasOwnProperty(item)) continue;
+  
+  console.log(item + '는 가격이 ' + store[item] + '입니다.');
+}
+```
+
+* for - in 반복문을 사용할 때는 hasOwnProperty를 통해 객체 안에 속성이 있는지 확인하는 것을 권장합니다.
+
+# 반복문 - while
+
+```javascript
+var hometown = [
+  {name: '남준', place: '일산', city: '고양'},
+  {name: '진', place: '과천'},
+  {name: '호석', place: '광주', city: '전라도'},
+  {name: '지민', place: '부산', city: '경상도'}
+];
+
+var isHometown = function(h, name) {
+  console.log('함수가 실행되었습니다.);
+  
+  if(h.name === name) {
+    console.log('${h.name} 의 고향은 ${h.city} ${h.place} 입니다.');
+    return true;
+  }
+  return false;
+}
+
+var h;
+while(h = hometown.shift()) {
+  if(!h.name || !h.place || !h.city) continue;
+  
+  var result = isHometown(h, '호석');
+  if(result) break;
+}
+
+var i = 0;
+var names = ['남준', '정국', '윤기', '호섭'];
+var cities = ['경기', '부산', '대구', '광주'];
+
+do {
+  hometown[i] = {name: names[i], city: cities[i]};
+  i++
+} while (i < 4);;;
+
+console.log(hometown);
+```
+
+* shift()는 배열의 앞에서 부터 값을 하나씩 뺴는 함수 입니다. 예를 들어 [1, 2] 배열에 shift()가 실행되면 배열은 [2]가 됩니다.
