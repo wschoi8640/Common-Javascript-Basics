@@ -297,3 +297,140 @@ console.log(hometown);
 ```
 
 * shift()는 배열의 앞에서 부터 값을 하나씩 뺴는 함수 입니다. 예를 들어 [1, 2] 배열에 shift()가 실행되면 배열은 [2]가 됩니다.
+
+
+# 숫자형 이해하기
+
+```javascript
+console.log(Infinity);
+console.log(1 / Infinity);
+console.log(0 / 0);
+console.log(Infinity - Infinity);
+console.log(0 / "foo");
+```
+
+* Infinity는 수학적으로 무한대를 의미합니다.
+
+* 산술결과가 유효하지 않은 경우 NaN으로 출력됩니다.
+
+# 문자형 이해하기
+
+```javascript
+console.log("i'm iron man");
+console.log('we are avengers');
+console.log(`finger snap!`);
+console.log("Jarvis! \nYes, Master");
+```
+
+```
+i'm iron man
+we are avengers
+finger snap!
+Jarvis!
+Yes, Master
+```
+# 불린형 이해하기
+
+```javascript
+console.log(7 > 3);
+console.log(7 < 3);
+```
+
+```
+true
+false
+```
+
+# null과 undefined 이해하기
+
+```javascript
+var value = null;
+console.log(value);
+console.log(typeof value);
+var value;
+console.log(value);
+console.log(typeof value);
+```
+
+```
+null
+object
+null
+object
+undefined
+```
+
+* null은 비어있는 값
+
+* undefined는 값을 할당받지 않은 상태
+
+# 템플릿 문자열 이해하기
+
+```javascript
+var cart = [
+  {name : '옷', price : 2000},
+  {name : '가방', price : 1000}
+];
+var numOfItems = `카트에 ${cart.length}개의 아이템이 있습니다.`;
+var cartTable =
+`<ul>
+    <li>품목 : ${cart[0].name}, 가격 ${cart[0].price}</li>
+    <li>품목 : ${cart[1].name}, 가격 ${cart[1].price}</li>
+</ul>`;
+console.log(numOfItems);
+console.log(cartTable);
+
+var personName = 'harin';
+var helloString = 'hello' + personName;
+var helloTemplateString = `hello ${personName}`;
+console.log(helloString === helloTemplateString);
+console.log(typeof helloTemplateString);
+```
+
+```
+카트에 2개의 아이템이 있습니다.
+<ul>
+    <li>품목 : 옷, 가격 : 2000</li>
+    <li>품목 : 가방, 가격 : 1000</li>
+</ul>
+true
+string
+```
+
+* 템플릿 문자열은 따옴표가 아닌 <kbd>`</kbd>로 작성합니다.
+
+# 산술 연산자
+
+```javascript
+var x = 10;
+x += 5;
+x *= 2;
+console.log(x);
+var y = 10;
+y -= 5;
+y /= 5;
+console.log(y);
+```
+
+```
+30
+1
+```
+
+# 비교 연산자
+
+```javascript
+console.log(5==5);
+console.log("5"==5);
+console.log('5'==5);
+console.log('5'===5);
+```
+
+```
+true
+true
+true
+false
+```
+
+* == 연산자는 자료형이 다르면 강제로 형을 바꾼뒤에 비교 하기 때문에 문자열이어도 값이 같으면 true
