@@ -434,3 +434,185 @@ false
 ```
 
 * == 연산자는 자료형이 다르면 강제로 형을 바꾼뒤에 비교 하기 때문에 문자열이어도 값이 같으면 true
+
+# 자료형 변환 이해하기
+
+```javascript
+console.log("5" + 1);
+console.log("5" - 1);
+console.log("5" * 2);
+console.log("Iron Man" + 2);
+console.log("Five" * 2);
+
+var str = 5 + "1";
+console.log(str);
+console.log(typeof str);
+var str = Number(str);
+console.log(str);
+console.log(typeof str);
+var str = String(str);
+console.log(str);
+console.log(typeof str);
+```
+
+* '+' 연산자는 문자형과 숫자형의 연산에서 문자열을 우선시한다.
+
+* 나머지 연산에서는 문자형과 숫자형의 결과값이 NaN이 나올 수 있다.
+
+```
+51
+4
+Iron Man2
+NaN
+51
+String
+51
+Number
+51
+String
+```
+
+# 배열 이해하기
+
+```javascript
+var arr = [1, 2, 3, 4, 5];
+console.log(arr.length);
+console.log(arr[8]);
+```
+
+```
+5
+undefined
+```
+
+# 객체 이해하기
+
+```javascript
+var family = {
+  'address' : 'Seoul',
+  members : {},
+  addFamily : function(age, name, role) {
+    this.members[role] = {
+      age : age,
+      name : name
+    };
+  },
+  getHeadCount : function() {
+    return Object.keys(this.members).length;
+  }
+};
+
+family.addFamily(30, 'chloe', 'sister');
+family.addFamily(40, 'john', 'brother');
+family.addFamily(50, 'brian', 'father');
+console.log(family.getHeadCount());
+```
+
+```
+3
+```
+
+* 객체 키값에 ''를 넣은것과 넣지 않은 것의 차이는 없습니다.
+
+# 객체 이해하기2
+
+```javascript
+var family = {
+  'address' : 'Seoul',
+  members : {},
+  addFamily : function(age, name, role) {
+    this.members[role] = {
+      age : age,
+      name : name
+    };
+  },
+  getHeadCount : function() {
+    return Object.keys(this.members).length;
+  }
+};
+
+family.addFamily(30, 'chloe', 'sister');
+family.addFamily(40, 'john', 'brother');
+family.addFamily(50, 'brian', 'father');
+
+var printMembers = function() {
+  var members = family.members;
+  for (role in members) {
+    console.log('role : ' + role + ', name : ' + members[role].name + ', age : ' + members[role].age);
+  }
+};
+printMembers();
+
+var members = family.members;
+members['mother'] = {age : 51, name : 'jane'};
+members.dog = {age : 5, name : 'dogo'};
+delete members['father'];
+delete members.brother;
+
+printMembers();
+```
+
+```
+role : sister, name : chloe, age : 30
+role : brother, name : john, age : 40
+role : father, name : brian, age : 50
+role : sister, name : chloe, age : 30
+role : mother, name : jane, age : 51
+role : dog, name : dogo, age : 5
+```
+
+* 객체의 속성은 인덱스 형식([])이나 콤마 형식(foo.bar)으로 모두 접근 가능합니다.
+
+* 콤마 형식이 좀 더 선호되는 방식입니다.
+
+# ES6의 향상된 객체 문법 - 단축 속성명
+
+* ES6에 새로 추가된 단축 속성명을 활용하여 객체의 속성을 좀 더 간단하게 정의할 수 있습니다.
+
+* 단축 속성명은 변수가 미리 준비되어 있는 경우 활용 가능합니다.
+
+```javascript
+var address = 'Seoul';
+var members = {};
+var addFamily = function(age, name, role) {
+  this.members[role] = {age, name};
+};
+var getHeadCount = function() {
+  return Object.keys(this.members).length;
+};
+
+var family = {address, members, addFamily, getHeadCount};
+
+family.addFamily(30, 'chloe', 'aunt');
+family.addFamily(3, 'lyn', 'niece');
+family.addFamily(10, 'daengdaeng', 'dog');
+console.log(family.getHeadCount());
+```
+
+# ES6의 향상된 객체 문법 - 속성 계산명
+
+* 속성 계산명은 속성 이름을 정의하는 다른 방법입니다.
+
+* 대괄호 [] 안에 식이나 변수를 대입하여 동적으로 객체 속성들을 생성할 수 있습니다.
+
+* 대괄호를 반드시 사용해야 합니다.
+
+```javascript
+var obj = {};
+for (var i = 0; i < 4; i++){
+  obj['key' + i] = i;
+}
+console.log(obj);
+
+var profile = 'choi:30';
+var person = {
+  [profile] : true,
+  [profile.split(':')[0]] : profile.split(':')[1]
+};
+console.log(person);
+```
+
+```
+{key0: 0, key1: 1, key2: 2, key3: 3}
+{choi:30: true, choi: "30"}
+```
