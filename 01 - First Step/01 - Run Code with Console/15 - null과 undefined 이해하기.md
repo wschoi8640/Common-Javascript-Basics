@@ -16,3 +16,7 @@ null
 object
 undefined
 ```
+
+* null은 비어있는 값
+
+* undefined는 값을 할당받지 않은 상태
