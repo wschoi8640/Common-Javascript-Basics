@@ -616,3 +616,131 @@ console.log(person);
 {key0: 0, key1: 1, key2: 2, key3: 3}
 {choi:30: true, choi: "30"}
 ```
+
+# ES6의 향상된 객체 문법 - 비구조화 할당
+
+* 비구조화 할당은 배열이나 객체의 값을 새로운 변수에 쉽게 할당합니다.
+
+* 중괄호 {} 안에 속성 이름을 넣어 객체의 여러 속성을 한 번에 가져올 수 있습니다.
+
+```javascript
+var obj = {a: 1, b: 2, c: 30, d: 44, e: 5};
+
+var {a, c} = obj
+console.log('a : ${a}');
+console.log('c : ${c}');
+
+var {a:newA = 10, f:newF = 5} = obj
+console.log('newA : ${newA}');
+console.log('newF : ${newF}');
+```
+
+* var {foo, bar} = obj 는 객체를 비구조화 하여 해당 변수를 밖으로 꺼내옵니다.
+
+* var {foo:newFoo = 'bar', ...} 는 기존의 속성 foo을 가져와서 새로운 속성 newFoo에 할당하되 undefined 인 경우에는
+'bar'값을 입력하도록 합니다.
+
+```
+a : 1
+c : 30
+newA : 1
+newF : 5
+```
+
+* 배열 비구조화 할당은 객체 비구조화 방식에서 중괄호를 대괄호로 바꾸면 됩니다.
+
+```javascript
+var arr = [1, 2, 30, 44, 5];
+
+var [b, c, ... d] = arr;
+console.log('0) b : ${b}');
+console.log('0) c : ${c}');
+console.log('0) f : ${d}');
+
+var [a=10, f=9] = [1];
+console.log('1) a : ${a}');
+console.log('1) f : ${f}');
+
+[a, f] = [f, a];
+console.log('1) a : ${a}');
+console.log('1) f : ${f}');
+
+function getArr(){
+  return [1, 2, 3, 4, 5, 6];
+}
+[a, , , , , f] = getArr();
+console.log('3) a : ${a}');
+console.log('3) f : ${f}');
+```
+
+* 나머지 변수 지시자 ... 을 활용하면 나머지 값들을 한번에 담을 수 있습니다.
+
+* 배열 비구조화에서도 undefined 인 경우를 대비한 값을 미리 설정해 둘 수 있습니다.
+
+* [foo, bar] = [bar, foo] 를 통해 할당 값을 swap 해 줄 수 있습니다.
+
+* 함수에서 반환된 배열값을 비구조화 할 수도 있고, 일부 배열 요소를 건너뛰고 원하는 요소만 저장할 수도 있습니다.
+
+# 심볼형 이해하기
+
+```javascript
+const symbol = Symbol();
+const hello = Symbol('hello');
+
+console.log(Number(3) == Number(3));
+console.log(Symbol('symbol') == Symbol('symbol'));
+console.log(Symbol() == Symbol());
+console.log(typeof Symbol());
+
+const nationality = Symbol('nationality');
+const user = {
+  name: 'jay'
+};
+user[nationality] = 'korean';
+console.log(user[nationality]);
+
+for(let key in user){
+  console.log(key);
+}
+
+console.log(Object.keys(user));
+console.log(Object.getOwnPropertyNames(user));
+console.log(JSON.stringify(user));
+
+const symbolProperties = Object.getOwnPropertySymbols(user);
+console.log(symbolProperties);
+console.log(user[symbolProperties[0]]);
+```
+
+```
+true
+false
+false
+symbol
+korean
+name
+["name"]
+["name"]
+{"name" : "jay"}
+[Symbol(nationality)]
+korean
+```
+
+# 함수 이해하기
+
+```javascript
+var greeting_expression = function(name){
+  console.log('Hi, ' + name);
+};
+
+function greeting_declaration(name){
+  console.log('Hi, ' + name);
+}
+greeting_expression('choi');
+greeting_declaration('choi');
+```
+
+```
+Hi, choi
+Hi, choi
+```
