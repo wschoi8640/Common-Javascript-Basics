@@ -18,6 +18,8 @@ global
 Uncaught ReferenceError : blockScopeValue is not defined
 ```
 
+---
+
 * let은 var과는 달리 호이스팅으로 undefined 값이 할당되기 보다는 블록 시작부터 선언이 이루어진 라인까지 접근을 막습니다.
 
 * 해당 영역에서 변수에 접근을 하게 되면 에러가 발생합니다.
